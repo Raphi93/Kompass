@@ -8,7 +8,9 @@ public partial class MagnetPage : ContentPage
 	public MagnetPage()
 	{
 		InitializeComponent();
-	}
+        ToggleCompass();
+
+    }
 
     private void ToggleCompass()
     {
