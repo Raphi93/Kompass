@@ -52,4 +52,8 @@
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Views\" />
+	</ItemGroup>
+
 </Project>
