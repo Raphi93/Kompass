@@ -4,10 +4,15 @@
              x:Class="Kompass.Views.MagnetPage"
              Title="MagnetPage">
     <VerticalStackLayout>
-        <Label 
+        <Image 
             x:Name="CompassLabel"
-            Text="Welcome to .NET MAUI!"
+            Source="compass.png"
+            Rotation="{Binding CompassRotation, Mode=TwoWay}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+
+        <Button Command="{Binding GetCompass}"
+                Text="Kompass"/>
     </VerticalStackLayout>
 </ContentPage>
