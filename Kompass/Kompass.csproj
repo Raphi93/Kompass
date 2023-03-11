@@ -57,9 +57,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\GeographicPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\MagnetPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
