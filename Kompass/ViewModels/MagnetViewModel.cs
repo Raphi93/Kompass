@@ -45,7 +45,8 @@ namespace Kompass.ViewModels
         {
             // Update UI Label with compass state
             var heading = e.Reading.HeadingMagneticNorth;
-            CompassRotation =  Convert.ToDouble(heading);
+            double rotationAngle = (360 - heading) % 360;
+            CompassRotation =  Convert.ToDouble(rotationAngle);
         }
 
         public double CompassRotation
