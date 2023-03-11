@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-
 
 namespace Kompass.ViewModels
 {
@@ -36,17 +30,44 @@ namespace Kompass.ViewModels
                 {
                     // Turn off compass
                     Compass.Default.Stop();
+                    CompassRotation = 0;
                     Compass.Default.ReadingChanged -= Compass_ReadingChanged;
                 }
             }
         }
 
-        private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
+        private async void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
             // Update UI Label with compass state
             var heading = e.Reading.HeadingMagneticNorth;
             double rotationAngle = (360 - heading) % 360;
             CompassRotation =  Convert.ToDouble(rotationAngle);
+            if ((rotationAngle >= -5) && (rotationAngle <= 5))
+            {
+                await FlashLightsNorth();
+            }
+            else if ((rotationAngle >= 175) && (rotationAngle <= 185))
+            {
+                await FlashLightsSouth();
+            }
+        }
+
+        private async Task FlashLightsSouth()
+        {
+            await Flashlight.Default.TurnOnAsync();
+            await Task.Delay(333);
+            await Flashlight.Default.TurnOffAsync();
+            await Task.Delay(333);
+            await Flashlight.Default.TurnOnAsync();
+            await Task.Delay(333);
+            await Flashlight.Default.TurnOffAsync();
+        }
+
+        private async Task FlashLightsNorth()
+        {
+            await Flashlight.Default.TurnOnAsync();
+            await Task.Delay(1000);
+            await Flashlight.Default.TurnOffAsync();
         }
 
         public double CompassRotation

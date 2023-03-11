@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kompass.Views.MagnetPage"
              Title="MagnetPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout Spacing="10"
+                         Margin="15">
         <Image 
             x:Name="CompassLabel"
             Source="compass.png"
             Rotation="{Binding CompassRotation, Mode=TwoWay}"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
 
 
         <Button Command="{Binding GetCompass}"
