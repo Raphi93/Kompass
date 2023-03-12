@@ -7,40 +7,86 @@ namespace Kompass.ViewModels
     {
 
         private double _compassRotation;
+        public double CompassRotation
+        {
+            get { return _compassRotation; }
+            set
+            {
+                SetProperty(ref _compassRotation, value);
+            }
+        }
+
+        private string _buttonText = "Kompass anschalten";
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set
+            {
+                SetProperty(ref _buttonText, value);
+            }
+        }
+
+
+        private double _compassRotation;
         private bool _isLight;
         public ICommand GetCompass { get; set; }
 
 
         public MagnetViewModel()
         {
-            GetCompass = new AsyncRelayCommand(ToggleCompass);
+            ButtonText = "Kompass anschalten";
+            GetCompass = new AsyncRelayCommand(ToggleCompass, CanToggleCompass);
+        }
+
+        public bool CanToggleCompass()
+        {
+            if (!Compass.Default.IsSupported)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private async Task ToggleCompass()
         {
-            if (Compass.Default.IsSupported)
+
+            if (!Compass.Default.IsMonitoring)
             {
-                if (!Compass.Default.IsMonitoring)
-                {
-                    // Turn on compass
-                    Compass.Default.ReadingChanged += Compass_ReadingChanged;
-                    Compass.Default.Start(SensorSpeed.UI);
-                }
-                else
-                {
-                    // Turn off compass
-                    Compass.Default.Stop();
-                    CompassRotation = 0;
-                    Compass.Default.ReadingChanged -= Compass_ReadingChanged;
-                }
+                await TurnOn_Compass();
             }
+            else
+            {
+                await TurnOff_Compass();
+            }
+
+
+        }
+
+        public async Task TurnOff_Compass()
+        {
+            CompassRotation = 0;
+            ButtonText = "Kompass anschalten";
+            Compass.Default.Stop();
+            await Flashlight.TurnOffAsync();
+            Compass.Default.ReadingChanged -= Compass_ReadingChanged;
+        }
+
+        public async Task TurnOn_Compass()
+        {
+            Compass.Default.ReadingChanged += Compass_ReadingChanged;
+            Compass.Default.Start(SensorSpeed.UI);
+            ButtonText = "Kompass ausschalten";
         }
 
         private async void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
-            // Update UI Label with compass state
             var heading = e.Reading.HeadingMagneticNorth;
             double rotationAngle = (360 - heading) % 360;
+            CompassRotation = Convert.ToDouble(rotationAngle);
+            if ((rotationAngle >= -5) && (rotationAngle <= 5))
             CompassRotation =  Convert.ToDouble(rotationAngle);
             if ((rotationAngle >= -10) && (rotationAngle <= 10) && (IsLight))
             {
