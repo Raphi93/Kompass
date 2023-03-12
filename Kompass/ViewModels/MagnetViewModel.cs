@@ -6,8 +6,8 @@ namespace Kompass.ViewModels
     public class MagnetViewModel : ViewModelBase
     {
 
-        private double _compassRotation; 
-
+        private double _compassRotation;
+        private bool _isLight;
         public ICommand GetCompass { get; set; }
 
 
@@ -42,11 +42,11 @@ namespace Kompass.ViewModels
             var heading = e.Reading.HeadingMagneticNorth;
             double rotationAngle = (360 - heading) % 360;
             CompassRotation =  Convert.ToDouble(rotationAngle);
-            if ((rotationAngle >= -5) && (rotationAngle <= 5))
+            if ((rotationAngle >= -10) && (rotationAngle <= 10) && (IsLight))
             {
                 await FlashLightsNorth();
             }
-            else if ((rotationAngle >= 175) && (rotationAngle <= 185))
+            else if ((rotationAngle >= 170) && (rotationAngle <= 190) && (IsLight))
             {
                 await FlashLightsSouth();
             }
@@ -76,6 +76,15 @@ namespace Kompass.ViewModels
             set
             {
                 SetProperty(ref _compassRotation, value);
+            }
+        }
+
+        public bool IsLight
+        {
+            get { return _isLight; }
+            set
+            {
+                SetProperty(ref _isLight, value);
             }
         }
     }

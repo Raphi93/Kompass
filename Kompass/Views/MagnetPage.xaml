@@ -4,7 +4,8 @@
              x:Class="Kompass.Views.MagnetPage"
              Title="Kompass">
     <VerticalStackLayout Spacing="15"
-                         Margin="20">
+                         Margin="20"
+                         BackgroundColor="White">
         <Label Text="Magnetischer Kompass"
                FontSize="Large"/>
 
@@ -16,6 +17,11 @@
             HorizontalOptions="Center"/>
 
 
+        <HorizontalStackLayout>
+            <Label Text="Lichter" 
+                   VerticalTextAlignment="Center"/>
+            <Switch IsToggled="{Binding IsLight}"/>
+        </HorizontalStackLayout>
         <Button Command="{Binding GetCompass}"
                 Text="Kompass An/Ausschalten"/>
     </VerticalStackLayout>
