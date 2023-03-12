@@ -2,21 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kompass.Views.MagnetPage"
-             Title="Kompass">
+             Title="Kompass"
+             >
     <VerticalStackLayout Spacing="15"
                          Margin="20">
         <Label Text="Magnetischer Kompass"
                FontSize="Large"/>
 
-        <Image 
-            x:Name="CompassLabel"
+        <Image
+            x:Name="CompassImage"
             Source="compass.png"
             Rotation="{Binding CompassRotation, Mode=TwoWay}"
             VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            HorizontalOptions="Center"
+            MaximumHeightRequest="400"
+            MaximumWidthRequest="400"/>
 
 
-        <Button Command="{Binding GetCompass}"
-                Text="Kompass An/Ausschalten"/>
+        <Button x:Name="CompassButton"
+            Command="{Binding GetCompass}"
+                Text="{Binding ButtonText, Mode=TwoWay}" IsEnabled="True"/>
+
+        <Label Text="{Binding CompassLabel, Mode=TwoWay}"></Label>
     </VerticalStackLayout>
 </ContentPage>
