@@ -7,27 +7,7 @@ namespace Kompass.ViewModels
     {
 
         private double _compassRotation;
-        public double CompassRotation
-        {
-            get { return _compassRotation; }
-            set
-            {
-                SetProperty(ref _compassRotation, value);
-            }
-        }
 
-        private string _buttonText = "Kompass anschalten";
-        public string ButtonText
-        {
-            get { return _buttonText; }
-            set
-            {
-                SetProperty(ref _buttonText, value);
-            }
-        }
-
-
-        private double _compassRotation;
         private bool _isLight;
         public ICommand GetCompass { get; set; }
 
@@ -49,6 +29,26 @@ namespace Kompass.ViewModels
                 return true;
             }
         }
+
+        public double CompassRotation
+        {
+            get { return _compassRotation; }
+            set
+            {
+                SetProperty(ref _compassRotation, value);
+            }
+        }
+
+        private string _buttonText = "Kompass anschalten";
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set
+            {
+                SetProperty(ref _buttonText, value);
+            }
+        }
+
 
         private async Task ToggleCompass()
         {
@@ -85,14 +85,12 @@ namespace Kompass.ViewModels
         {
             var heading = e.Reading.HeadingMagneticNorth;
             double rotationAngle = (360 - heading) % 360;
-            CompassRotation = Convert.ToDouble(rotationAngle);
-            if ((rotationAngle >= -5) && (rotationAngle <= 5))
             CompassRotation =  Convert.ToDouble(rotationAngle);
-            if ((rotationAngle >= -10) && (rotationAngle <= 10) && (IsLight))
+            if ((rotationAngle >= -5) && (rotationAngle <= 5) && (IsLight))
             {
                 await FlashLightsNorth();
             }
-            else if ((rotationAngle >= 170) && (rotationAngle <= 190) && (IsLight))
+            else if ((rotationAngle >= 175) && (rotationAngle <= 185) && (IsLight))
             {
                 await FlashLightsSouth();
             }
@@ -114,15 +112,6 @@ namespace Kompass.ViewModels
             await Flashlight.Default.TurnOnAsync();
             await Task.Delay(1000);
             await Flashlight.Default.TurnOffAsync();
-        }
-
-        public double CompassRotation
-        {
-            get { return _compassRotation; }
-            set
-            {
-                SetProperty(ref _compassRotation, value);
-            }
         }
 
         public bool IsLight

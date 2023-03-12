@@ -19,17 +19,13 @@
             MaximumHeightRequest="400"
             MaximumWidthRequest="400"/>
 
-
-        <Button x:Name="CompassButton"
-            Command="{Binding GetCompass}"
-                Text="{Binding ButtonText, Mode=TwoWay}" IsEnabled="True"/>
-
         <HorizontalStackLayout>
             <Label Text="Lichter" 
                    VerticalTextAlignment="Center"/>
             <Switch IsToggled="{Binding IsLight}"/>
         </HorizontalStackLayout>
-        <Button Command="{Binding GetCompass}"
-                Text="Kompass An/Ausschalten"/>
+        <Button x:Name="CompassButton"
+            Command="{Binding GetCompass}"
+                Text="{Binding ButtonText, Mode=TwoWay}" IsEnabled="True"/>
     </VerticalStackLayout>
 </ContentPage>
