@@ -7,48 +7,14 @@ namespace Kompass.ViewModels
     {
 
         private double _compassRotation;
-
         private bool _isLight;
         public ICommand GetCompass { get; set; }
-
 
         public MagnetViewModel()
         {
             ButtonText = "Kompass anschalten";
             GetCompass = new AsyncRelayCommand(ToggleCompass, CanToggleCompass);
         }
-
-        public bool CanToggleCompass()
-        {
-            if (!Compass.Default.IsSupported)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public double CompassRotation
-        {
-            get { return _compassRotation; }
-            set
-            {
-                SetProperty(ref _compassRotation, value);
-            }
-        }
-
-        private string _buttonText = "Kompass anschalten";
-        public string ButtonText
-        {
-            get { return _buttonText; }
-            set
-            {
-                SetProperty(ref _buttonText, value);
-            }
-        }
-
 
         private async Task ToggleCompass()
         {
@@ -63,6 +29,18 @@ namespace Kompass.ViewModels
             }
 
 
+        }
+
+        public bool CanToggleCompass()
+        {
+            if (!Compass.Default.IsSupported)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public async Task TurnOff_Compass()
@@ -112,6 +90,25 @@ namespace Kompass.ViewModels
             await Flashlight.Default.TurnOnAsync();
             await Task.Delay(1000);
             await Flashlight.Default.TurnOffAsync();
+        }
+
+        public double CompassRotation
+        {
+            get { return _compassRotation; }
+            set
+            {
+                SetProperty(ref _compassRotation, value);
+            }
+        }
+
+        private string _buttonText = "Kompass anschalten";
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set
+            {
+                SetProperty(ref _buttonText, value);
+            }
         }
 
         public bool IsLight
