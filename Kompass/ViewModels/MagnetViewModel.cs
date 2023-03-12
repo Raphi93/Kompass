@@ -27,8 +27,6 @@ namespace Kompass.ViewModels
             {
                 await TurnOff_Compass();
             }
-
-
         }
 
         public bool CanToggleCompass()
