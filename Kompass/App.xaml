@@ -7,9 +7,25 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary
+                    Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary
+                    Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Image" x:Key="KompassImage">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Margin" Value="50" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="MaximumHeightRequest" Value="500"/>
+                <Setter Property="MaximumWidthRequest" Value="500" />
+            </Style>
+            <Style TargetType="Button" x:Key="Button">
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+            <Style TargetType="HorizontalStackLayout" x:Key="Lichter">
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

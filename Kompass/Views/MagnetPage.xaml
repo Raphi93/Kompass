@@ -12,17 +12,15 @@
             x:Name="CompassImage"
             Source="compass.png"
             Rotation="{Binding CompassRotation, Mode=TwoWay}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            MaximumHeightRequest="400"
-            MaximumWidthRequest="400"/>
+            Style="{StaticResource KompassImage}" />
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Style="{StaticResource Lichter}">
             <Label Text="Lichter" 
                    VerticalTextAlignment="Center"/>
             <Switch IsToggled="{Binding IsLight}"/>
         </HorizontalStackLayout>
         <Button x:Name="CompassButton"
+                Style="{StaticResource Button}"
             Command="{Binding GetCompass}"
                 Text="{Binding ButtonText, Mode=TwoWay}" IsEnabled="True"/>
     </VerticalStackLayout>
