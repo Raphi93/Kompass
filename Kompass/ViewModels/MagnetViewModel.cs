@@ -16,6 +16,11 @@ namespace Kompass.ViewModels
             GetCompass = new AsyncRelayCommand(ToggleCompass, CanToggleCompass);
         }
 
+
+        /// <summary>
+        /// Schalten den Kompass ein und oder aus
+        /// </summary>
+        /// <returns></returns>
         private async Task ToggleCompass()
         {
 
@@ -29,6 +34,10 @@ namespace Kompass.ViewModels
             }
         }
 
+        /// <summary>
+        /// Prüft ob es Supported ist
+        /// </summary>
+        /// <returns></returns>
         public bool CanToggleCompass()
         {
             if (!Compass.Default.IsSupported)
@@ -41,6 +50,11 @@ namespace Kompass.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// Schalten den Kompass aus
+        /// </summary>
+        /// <returns></returns>
         public async Task TurnOff_Compass()
         {
             CompassRotation = 0;
@@ -50,6 +64,11 @@ namespace Kompass.ViewModels
             Compass.Default.ReadingChanged -= Compass_ReadingChanged;
         }
 
+
+        /// <summary>
+        /// Schaltet den Kompasss aus
+        /// </summary>
+        /// <returns></returns>
         public async Task TurnOn_Compass()
         {
             Compass.Default.ReadingChanged += Compass_ReadingChanged;
@@ -57,6 +76,11 @@ namespace Kompass.ViewModels
             ButtonText = "Kompass ausschalten";
         }
 
+        /// <summary>
+        /// ändert die richtung
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
             var heading = e.Reading.HeadingMagneticNorth;
@@ -72,6 +96,10 @@ namespace Kompass.ViewModels
             }
         }
 
+        /// <summary>
+        /// Flashlight schaltet es ein im süden
+        /// </summary>
+        /// <returns></returns>
         private async Task FlashLightsSouth()
         {
             await Flashlight.Default.TurnOnAsync();
@@ -83,6 +111,11 @@ namespace Kompass.ViewModels
             await Flashlight.Default.TurnOffAsync();
         }
 
+
+        /// <summary>
+        /// Flashlights im Norden
+        /// </summary>
+        /// <returns></returns>
         private async Task FlashLightsNorth()
         {
             await Flashlight.Default.TurnOnAsync();
