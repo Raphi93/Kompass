@@ -2,11 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kompass.Views.MagnetPage"
-             Title="Kompass"
-             >
+             Title="Kompass">
     <VerticalStackLayout Spacing="15"
-                         Margin="20"
-                         BackgroundColor="White">
+                         Margin="20">
         <Label Text="Magnetischer Kompass"
                FontSize="Large"/>
 
