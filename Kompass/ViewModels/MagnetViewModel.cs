@@ -90,7 +90,7 @@ namespace Kompass.ViewModels
             {
                 await FlashLightsNorth();
             }
-            else if ((rotationAngle >= 175) && (rotationAngle <= 185) && (IsLight))
+            if ((rotationAngle >= 175) && (rotationAngle <= 185) && (IsLight))
             {
                 await FlashLightsSouth();
             }
