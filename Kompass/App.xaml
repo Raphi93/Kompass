@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="Image" x:Key="KompassImage">
                 <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Margin" Value="50" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="MaximumHeightRequest" Value="500"/>
