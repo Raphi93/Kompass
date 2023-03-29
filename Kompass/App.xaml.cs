@@ -1,18 +1,17 @@
 ﻿using Kompass.ViewModels;
-using Kompass.Views;
-
 
 namespace Kompass;
 
 public partial class App : Application
 {
-	private MagnetViewModel magnetViewModel = new MagnetViewModel();
-	public App()
-	{
-		InitializeComponent();
+    private KompassViewModel magnetViewModel = new KompassViewModel();
+
+    public App()
+    {
+        InitializeComponent();
 
         MainPage = new AppShell();
-	}
+    }
 
     // Does not work because of new Instance of ViewModel
     //protected override void OnResume()

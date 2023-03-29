@@ -1,21 +1,19 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace Kompass.ViewModels
 {
-    public class MagnetViewModel : ViewModelBase
+    public class KompassViewModel : ViewModelBase
     {
-
         private double _compassRotation;
         private bool _isLight;
         public ICommand GetCompass { get; set; }
 
-        public MagnetViewModel()
+        public KompassViewModel()
         {
             ButtonText = "Kompass anschalten";
             GetCompass = new AsyncRelayCommand(ToggleCompass, CanToggleCompass);
         }
-
 
         /// <summary>
         /// Schalten den Kompass ein und oder aus
@@ -23,7 +21,6 @@ namespace Kompass.ViewModels
         /// <returns></returns>
         private async Task ToggleCompass()
         {
-
             if (!Compass.Default.IsMonitoring)
             {
                 await TurnOn_Compass();
@@ -42,14 +39,15 @@ namespace Kompass.ViewModels
         {
             if (!Compass.Default.IsSupported)
             {
+                ButtonText = "Kompass nicht unterstützt";
                 return false;
             }
             else
             {
+                ButtonText = "Kompass anschalten";
                 return true;
             }
         }
-
 
         /// <summary>
         /// Schalten den Kompass aus
@@ -63,7 +61,6 @@ namespace Kompass.ViewModels
             await Flashlight.TurnOffAsync();
             Compass.Default.ReadingChanged -= Compass_ReadingChanged;
         }
-
 
         /// <summary>
         /// Schaltet den Kompasss aus
@@ -85,7 +82,7 @@ namespace Kompass.ViewModels
         {
             var heading = e.Reading.HeadingMagneticNorth;
             double rotationAngle = (360 - heading) % 360;
-            CompassRotation =  Convert.ToDouble(rotationAngle);
+            CompassRotation = Convert.ToDouble(rotationAngle);
             if ((rotationAngle >= -5) && (rotationAngle <= 5) && (IsLight))
             {
                 await FlashLightsNorth();
@@ -111,7 +108,6 @@ namespace Kompass.ViewModels
             await Flashlight.Default.TurnOffAsync();
         }
 
-
         /// <summary>
         /// Flashlights im Norden
         /// </summary>
@@ -125,30 +121,22 @@ namespace Kompass.ViewModels
 
         public double CompassRotation
         {
-            get { return _compassRotation; }
-            set
-            {
-                SetProperty(ref _compassRotation, value);
-            }
+            get => _compassRotation;
+            set => SetProperty(ref _compassRotation, value);
         }
 
         private string _buttonText = "Kompass anschalten";
+
         public string ButtonText
         {
-            get { return _buttonText; }
-            set
-            {
-                SetProperty(ref _buttonText, value);
-            }
+            get => _buttonText;
+            set => SetProperty(ref _buttonText, value);
         }
 
         public bool IsLight
         {
-            get { return _isLight; }
-            set
-            {
-                SetProperty(ref _isLight, value);
-            }
+            get => _isLight;
+            set => SetProperty(ref _isLight, value);
         }
     }
 }

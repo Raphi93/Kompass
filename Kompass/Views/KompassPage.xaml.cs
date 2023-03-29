@@ -1,19 +1,17 @@
 using Kompass.ViewModels;
-using Microsoft.Maui.Devices.Sensors;
 
 namespace Kompass.Views;
 
-
-public partial class MagnetPage : ContentPage
+public partial class KompassPage : ContentPage
 {
+    private readonly KompassViewModel _kompassViewModel;
 
-	MagnetViewModel _magnetViewModel;
-	public MagnetPage()
-	{
+    public KompassPage()
+    {
         InitializeComponent();
 
-        _magnetViewModel = new MagnetViewModel();
-		BindingContext = _magnetViewModel;
+        _kompassViewModel = new KompassViewModel();
+        BindingContext = _kompassViewModel;
     }
 
     protected override void OnAppearing()
@@ -27,6 +25,6 @@ public partial class MagnetPage : ContentPage
     {
         base.OnDisappearing();
         if (Compass.Default.IsSupported)
-            _ = _magnetViewModel.TurnOff_Compass();
+            _ = _kompassViewModel.TurnOff_Compass();
     }
 }
